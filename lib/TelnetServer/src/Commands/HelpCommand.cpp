@@ -1,5 +1,5 @@
-#ifndef LED_ON_COMMAND_CLASS
-#define LED_ON_COMMAND_CLASS
+#ifndef HELP_COMMAND_CLASS
+#define HELP_COMMAND_CLASS
 
 #include "Command.h"
 #include "CommandListItem.h"
@@ -16,8 +16,6 @@ class HelpCommand : public Command
     {
         if (strcmp(line, "HELP") == 0)
         {
-            Serial.println("Processing HELP");
-
             socket->write("COMMANDS:\r\n");
 
             CommandListItem *item = _commands;
