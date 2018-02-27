@@ -1,5 +1,5 @@
 # esp8266-telnet-server
-A telnet server on esp8266
+A telnet server on esp8266 open to extend the commands
 
 # Getting started
 ```cpp
