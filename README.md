@@ -18,7 +18,9 @@ void loop()
 # Add a custom command handler
 ```cpp
 void setup() {
+    // we should add all command handlers before start method invoked
     telnet.add(new LedBuiltInOnCommand());
+    
     telnet.start();
 }
 ```
