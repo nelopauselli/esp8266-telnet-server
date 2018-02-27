@@ -14,7 +14,7 @@ TelnetServer telnet(PORT);
 
 bool connectWifi()
 {
-    Serial.println("Conneting to ");
+    Serial.print("Conneting to ");
     Serial.println(ssid);
 
     WiFi.mode(WIFI_STA);
@@ -37,7 +37,7 @@ bool connectWifi()
     Serial.print("Open a telnet client as Putty in Windows and connect to ");
     Serial.print(WiFi.localIP());
     Serial.print(" on port ");
-    Serial.println(PORT);
+    Serial.println(PORT, DEC);
 
     return true;
 }
