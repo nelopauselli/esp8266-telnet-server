@@ -22,11 +22,8 @@ class HelpCommand : public Command
 
             CommandListItem *item = _commands;
 
-            int index = 0;
             while (item != NULL)
             {
-                Serial.println(index++);
-
                 Command *command = item->command;
                 command->help(socket);
 
