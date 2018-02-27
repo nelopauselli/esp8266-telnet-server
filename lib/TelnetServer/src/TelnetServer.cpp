@@ -52,7 +52,7 @@ void TelnetServer::process()
             socket = server->available();
 
             socket.write("\r\n");
-            socket.write("####### ####### #       #     # ####### #######                      \r\n");
+            socket.write(" ####### ####### #       #     # ####### #######                     \r\n");
             socket.write("    #    #       #       ##    # #          #           ####  #    # \r\n");
             socket.write("    #    #       #       # #   # #          #          #    # ##   # \r\n");
             socket.write("    #    #####   #       #  #  # #####      #          #    # # #  # \r\n");
