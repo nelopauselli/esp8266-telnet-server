@@ -5,8 +5,8 @@
 #include "LedBuiltInOnCommand.cpp"
 #include "LedBuiltInOffCommand.cpp"
 
-const char *ssid = "your-ssid";
-const char *password = "your-password";
+const char *ssid = "Positano";
+const char *password = "sPMUh2DG4b";
 
 // Instanciating a telnet server on port 23
 #define PORT 23
@@ -52,8 +52,6 @@ void setup()
     // adding sample command handlers
     telnet.add(new LedBuiltInOnCommand());
     telnet.add(new LedBuiltInOffCommand());
-    telnet.add(new LedOnCommand(D4));
-    telnet.add(new LedOffCommand(D4));
 
     // starting the server
     telnet.start();
