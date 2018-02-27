@@ -1,32 +1,6 @@
-# esp8266-telnet-server
-A telnet server on esp8266
+#ifndef LED_BUILTIN_ON_COMMAND_CLASS
+#define LED_BUILTIN_ON_COMMAND_CLASS
 
-# Getting started
-```cpp
-#include "TelnetServer.h"
-
-TelnetServer telnet(23);
-void setup() {
-    telnet.start();
-}
-
-void loop() 
-    telnet.process();
-}
-```
-
-# Add a custom command handler
-```cpp
-void setup() {
-    // we should add all command handlers before start method invoked
-    telnet.add(new LedBuiltInOnCommand());
-
-    telnet.start();
-}
-```
-
-# Define a custom command handler (by example: turn on LED_BUILTIN)
-```cpp
 #include <Command.h>
 
 class LedBuiltInOnCommand : public Command
@@ -56,4 +30,5 @@ class LedBuiltInOnCommand : public Command
         socket->write("LED BUILTIN ON: turn on LED_BUILTIN\r\n");
     }
 };
-```
+
+#endif

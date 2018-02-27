@@ -2,8 +2,8 @@
 #include <ESP8266WiFi.h>
 
 #include "TelnetServer.h"
-#include "LedOnCommand.cpp"
-#include "LedOffCommand.cpp"
+#include "LedBuiltInOnCommand.cpp"
+#include "LedBuiltInOffCommand.cpp"
 
 const char *ssid = "your-ssid";
 const char *password = "your-password";
@@ -50,8 +50,10 @@ void setup()
     connectWifi();
 
     // adding sample command handlers
-    telnet.add(new LedOnCommand(LED_BUILTIN));
-    telnet.add(new LedOffCommand(LED_BUILTIN));
+    telnet.add(new LedBuiltInOnCommand());
+    telnet.add(new LedBuiltInOffCommand());
+    telnet.add(new LedOnCommand(D4));
+    telnet.add(new LedOffCommand(D4));
 
     // starting the server
     telnet.start();
