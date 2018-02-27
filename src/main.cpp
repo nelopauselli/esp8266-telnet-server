@@ -5,10 +5,12 @@
 #include "LedOnCommand.cpp"
 #include "LedOffCommand.cpp"
 
-const char* ssid     = "your-ssid";
-const char* password = "your-password";
+const char *ssid = "your-ssid";
+const char *password = "your-password";
 
-TelnetServer telnet(23);
+// Instanciating a telnet server on port 23
+#define PORT 23
+TelnetServer telnet(PORT);
 
 void connectWifi()
 {
@@ -18,18 +20,23 @@ void connectWifi()
     WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
 
-    while (WiFi.status() != WL_CONNECTED)
+    int i = 0;
+    while (WiFi.status() != WL_CONNECTED && i++ < 20)
     {
         delay(500);
-
-        Serial.print(WiFi.status());
-        Serial.print(" ");
+        Serial.print(".");
     }
 
-    Serial.print("Connection established with ");
-    Serial.println(WiFi.SSID());
-    Serial.print("IP address: ");
-    Serial.println(WiFi.localIP());
+    if (WiFi.status() != WL_CONNECTED)
+        Serial.println("Timeout. Connection fail :(");
+    else
+    {
+        Serial.println("Connection established.");
+        Serial.print("Open a telnet client as Putty in Windows and connect to ");
+        Serial.print(WiFi.localIP());
+        Serial.print(" on port ");
+        Serial.println(PORT);
+    }
 }
 
 void setup()
@@ -42,9 +49,11 @@ void setup()
 
     connectWifi();
 
+    // adding sample command handlers
     telnet.add(new LedOnCommand(LED_BUILTIN));
     telnet.add(new LedOffCommand(LED_BUILTIN));
-    
+
+    // starting the server
     telnet.start();
 }
 

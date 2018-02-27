@@ -10,11 +10,13 @@ TelnetServer::TelnetServer(int port)
     server->begin();
     server->setNoDelay(true);
 
+    // add a PingPong command handler
     add(new PingPongCommand());
 }
 
 void TelnetServer::add(Command *command)
 {
+    // Add the new command at end of list
     if (commands == NULL)
         commands = new CommandListItem(command);
     else
@@ -30,6 +32,7 @@ void TelnetServer::add(Command *command)
 
 void TelnetServer::start()
 {
+    // complete the commands list with help and NotFound
     add(new HelpCommand(commands));
     add(new NotFoundCommand());
 
@@ -38,10 +41,10 @@ void TelnetServer::start()
 
 void TelnetServer::process()
 {
-    //check if there are any new clients
+    // check if there are any new clients
     if (server->hasClient())
     {
-        //find free/disconnected spot
+        // only one client !
         if (!socket || !socket.connected())
         {
             if (socket)
@@ -65,6 +68,7 @@ void TelnetServer::process()
             socket.write("    #       #     # #       #     # #       #     # #     # \r\n");
             socket.write("    #######  #####  #        #####  #######  #####   #####  \r\n");
             socket.write("\r\n");
+            socket.write("Type HELP to list commands.\r\n");
             socket.write("$ ");
 
             // Clean input stream
@@ -75,14 +79,14 @@ void TelnetServer::process()
         }
         else
         {
-            //no free/disconnected spot so reject
+            // other client is working already, then incoming client is rejected
             WiFiClient other = server->available();
             other.write("Connection rejected");
             other.stop();
         }
     }
 
-    //check clients for data
+    // check client for data
     if (socket && socket.connected())
     {
         if (socket.available())
@@ -96,39 +100,43 @@ void TelnetServer::process()
                 char c = socket.read();
                 if (c == '\r')
                 {
-                    // no hacemos nada con este caracter
+                    // nothing to do
                 }
                 else if (c == '\n')
                 {
-                    // Fin de línea para la instrucción
+                    // end of command
                     break;
                 }
                 else
                 {
-                    // vamos acumulando los caracteres de la instrucción
+                    // adding chars to build command
                     buffer[bufferIndex++] = c;
                 }
             }
 
+            // ending command with a '\0'
             buffer[bufferIndex] = '\0';
             Serial.println(buffer);
 
-            if (strlen(buffer) > 0)
+            if (strlen(buffer) > 0) // skip blank command 
             {
                 CommandListItem *item = commands;
                 while (item != NULL)
                 {
+                    // iterating commands list waiting a handler be able to handle the command 
                     Command *command = item->command;
                     if (command != NULL)
                     {
                         if (command->process(buffer, &socket))
                         {
+                            // stop iteration when a command can handle the command
                             break;
                         }
                     }
                     item = item->next;
                 }
 
+                // tell to user that server is ready to another command
                 socket.write("$ ");
             }
         }
