@@ -59,6 +59,8 @@ class LedBuiltInOnCommand : public Command
 ```
 
 # Telnet client
-![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-1.png  "On connect") When connection is success
+##  When connection is success
+![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-1.png  "On connect")
 
-![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-4.png  "On connect") When commands are executed
+## When commands are executed
+![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-4.png  "On connect")
