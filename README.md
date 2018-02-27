@@ -1,7 +1,7 @@
 # esp8266-telnet-server
 A telnet server on esp8266 open to extend the commands
 
-_this code was writed using [PlatformIO](https://platformio.org/) and [vscode](https://code.visualstudio.com/)_
+_This code was writed using [PlatformIO](https://platformio.org/) and [vscode](https://code.visualstudio.com/). Would you like the Arduino IDE friendly code?... tell me!_
 
 # Getting started
 ```cpp
