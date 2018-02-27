@@ -27,7 +27,7 @@ void setup() {
 }
 ```
 
-# Define a custom command handler (by example: turn on LED_BUILTIN)
+# Define a custom command handler (for example: turn on LED_BUILTIN)
 ```cpp
 #include <Command.h>
 
@@ -62,7 +62,7 @@ class LedBuiltInOnCommand : public Command
 
 # Telnet client
 ##  When connection is success
-![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-1.png  "On connect")
+![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-1.png  "")
 
 ## When commands are executed
-![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-4.png  "On connect")
+![PuTTY console](https://github.com/nelopauselli/esp8266-telnet-server/raw/master/doc/putty-4.png  "")
